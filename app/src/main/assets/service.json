@@ -1,0 +1,18 @@
+[
+  {
+    "serpa_pwd": "t7I=X6YounKxhEaz",
+    "serpa_account": "chacha20-ietf-poly1305",
+    "serpa_port": 4391,
+    "serpa_country": "Australia",
+    "serpa_city": "Sydney",
+    "serpa_ip": "51.161.131.222"
+  },
+  {
+    "serpa_pwd": "t7I=X6YounKxhEaz",
+    "serpa_account": "chacha20-ietf-poly1305",
+    "serpa_port": 4391,
+    "serpa_country": "United States",
+    "serpa_city": "Atlanta",
+    "serpa_ip": "31.13.213.195"
+  }
+]

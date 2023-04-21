@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D172B"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="74dp"
+        android:background="@mipmap/logo_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Sturdy VPN"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="54dp"
+        android:background="#0D172B"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Contact us"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:drawableLeftCompat="@mipmap/setting_contact_us" />
+
+    <TextView
+        android:id="@+id/privacy_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:background="#0D172B"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Privacy Policy"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:drawableLeftCompat="@mipmap/setting_privacy" />
+
+    <!--    <TextView-->
+    <!--        android:padding="10dp"-->
+    <!--        android:id="@+id/update_tv"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="24dp"-->
+    <!--        android:layout_marginTop="38dp"-->
+    <!--        android:text="Update"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="14sp" />-->
+
+    <TextView
+        android:id="@+id/share_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:background="#0D172B"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Share"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:drawableLeftCompat="@mipmap/setting_share" />
+
+
+</LinearLayout>

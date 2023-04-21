@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+
+        <ImageView
+            android:id="@+id/home_title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@mipmap/home_title_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_setting_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@mipmap/home_setting_src"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="National VPN"
+            android:textColor="#FFFFFFFF"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/home_setting_src"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/home_setting_src" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/home_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_title" />
+
+        <TextView
+            android:id="@+id/home_connect_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Connect Time"
+            android:textColor="#FFFFFFFF"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_title" />
+
+        <Chronometer
+            android:id="@+id/the_connection_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="00:00:00"
+            android:textColor="#FFFFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_connect_time_title" />
+
+        <ImageView
+            android:id="@+id/home_connect_status_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@mipmap/home_connect_status_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/the_connection_time_tv" />
+
+        <FrameLayout
+            android:id="@+id/home_connect_status_src"
+            android:layout_width="84dp"
+            android:layout_height="157dp"
+            android:layout_marginTop="30dp"
+            android:background="@mipmap/home_connect_status_src"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/the_connection_time_tv" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@mipmap/home_connect_animation"
+            app:layout_constraintEnd_toEndOf="@id/home_connect_status_src"
+            app:layout_constraintStart_toStartOf="@id/home_connect_status_src"
+            app:layout_constraintTop_toTopOf="@id/home_connect_status_src" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/home_connect_status_iv"
+            app:layout_constraintBottom_toBottomOf="@id/home_connect_status_src"
+            app:layout_constraintEnd_toEndOf="@id/home_connect_status_src"
+            app:layout_constraintStart_toStartOf="@id/home_connect_status_src" />
+
+        <LinearLayout
+            android:id="@+id/home_service"
+            android:layout_marginTop="10dp"
+            android:layout_width="215dp"
+            android:layout_height="50dp"
+            android:background="@drawable/disconnect_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_connect_status_src">
+
+            <ImageView
+                android:id="@+id/home_country_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@mipmap/fast" />
+
+            <TextView
+                android:id="@+id/home_country_tv"
+                android:layout_marginStart="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Faster Server"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@mipmap/arrow_right" />
+        </LinearLayout>
+        <FrameLayout
+            android:layout_marginBottom="20dp"
+            android:id="@+id/ad_frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/home_ad_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
