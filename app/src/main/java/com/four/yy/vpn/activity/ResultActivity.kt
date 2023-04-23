@@ -44,10 +44,10 @@ class ResultActivity : BaseActivity<ActivityResultBinding>() {
             binding.connectionStatus.text = "Connected succeeded"
             binding.homeService.setBackgroundResource(R.drawable.connected_backgroud)
         }
-        loadNativeAd()
+        loadAd()
     }
 
-    private fun loadNativeAd() {
+    private fun loadAd() {
         val adBean = Constant.AdMap[Constant.adNative_r]
         var time: Long = 0
         if (adBean != null) {
@@ -57,7 +57,7 @@ class ResultActivity : BaseActivity<ActivityResultBinding>() {
             adManage.loadAd(Constant.adNative_r, this, object : AdManage.OnLoadAdCompleteListener {
                 override fun onLoadAdComplete(ad: AdBean?) {
                     if (ad?.ad != null) {
-                       showNativeAd(ad)
+                        showAd(ad)
                     }
                 }
 
@@ -66,10 +66,10 @@ class ResultActivity : BaseActivity<ActivityResultBinding>() {
                 }
             })
         } else {
-          showNativeAd(adBean)
+            showAd(adBean)
         }
     }
-    fun showNativeAd(ad: AdBean){
+    fun showAd(ad: AdBean){
         adManage.showAd(
             this@ResultActivity,
             Constant.adNative_r,

@@ -84,20 +84,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
                 return@setOnClickListener
             }
             if (!ButtonUtils.isFastDoubleClick(R.id.home_connect_status_src)) {
-                connect()
+                connectVpn()
             }
         }
         binding.settingLayout.contactUs.setOnClickListener {
             if (binding.drawerLayout.isOpen) {
-                openMail()
+                openSystemMail()
             }
         }
-//        binding.settingLayout..setOnClickListener {
-//            if (binding.drawerLayout.isOpen) {
-//                rateNow()
-////                showDialogByActivity("this version is the latest version", "OK", true, null)
-//            }
-//        }
+
         binding.settingLayout.privacyPolicy.setOnClickListener {
             if (binding.drawerLayout.isOpen) {
                 jumpActivity(PrivacyPolicyWebView::class.java)
@@ -118,13 +113,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
             }
             //choose service
             val intent = Intent(this, ServiceActivity::class.java)
-//            intent.putExtra("isConnection", state.canStop)
+            intent.putExtra("isConnection", state.canStop)
             startActivity(intent)
-            Log.d("xxxxx", binding.drawerLayout.isOpen.toString())
         }
     }
 
-    private fun openMail() {
+    private fun openSystemMail() {
         val uri: Uri = Uri.parse("mailto:" + Constant.mail)
         val packageInfos: List<ResolveInfo> =
             packageManager!!.queryIntentActivities(Intent(Intent.ACTION_SENDTO, uri), 0)
@@ -169,7 +163,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
                 binding.homeConnectStatusSrc.visibility = View.VISIBLE
                 if (!state.canStop) {
                     if (!ButtonUtils.isFastDoubleClick(R.id.animation_view)) {
-                        connect()
+                        connectVpn()
                     }
                 }
 
@@ -194,7 +188,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
 
     }
 
-    private fun connect() {
+    private fun connectVpn() {
         if (InterNetUtil().isShowIR()) {
             showDialogByActivity(
                 "Due to the policy reason , this service is not available in your country",
@@ -525,62 +519,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
         }
 
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: Country?) {
-        connect()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        SPUtils.get().putLong(Constant.connectTime, binding.theConnectionTimeTv.base)
-        SPUtils.get().putBoolean(Constant.isShowResultKey, false)
-        EventBus.getDefault().unregister(this)
-        countryBean = null
-    }
-
-    private fun loadNativeAd() {
-        val adBean = Constant.AdMap[Constant.adNative_h]
-        var time: Long = 0
-        if (adBean != null) {
-            time = System.currentTimeMillis() - adBean.saveTime
-        }
-
-        if (adBean?.ad == null || time > 50 * 60 * 1000) {
-            Log.d("xxxx", "load")
-            adManage.loadAd(Constant.adNative_h, this, object : AdManage.OnLoadAdCompleteListener {
-                override fun onLoadAdComplete(ad: AdBean?) {
-                    if (ad?.ad != null) {
-                        showNativeAd(ad)
-                    }
-                }
-
-                override fun isMax() {
-
-                }
-            })
-        } else {
-            Log.d("xxxx", "show")
-            showNativeAd(adBean)
-        }
-    }
-
-    fun showNativeAd(ad: AdBean) {
-        adManage.showAd(
-            this@MainActivity,
-            Constant.adNative_h,
-            ad,
-            binding.adFrameLayout,
-            object : AdManage.OnShowAdCompleteListener {
-                override fun onShowAdComplete() {
-                }
-
-                override fun isMax() {
-                }
-
-            })
-    }
-
     private fun loadInterAd(customizedDialog: CustomizedDialog) {
         interAdIsShow = false
         val adBean = Constant.AdMap[Constant.adInterstitial_h]
@@ -686,6 +624,60 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ShadowsocksConnection.
             AdManage().loadAd(Constant.adNative_r, this)
         }
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: Country?) {
+        connectVpn()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        SPUtils.get().putLong(Constant.connectTime, binding.theConnectionTimeTv.base)
+        SPUtils.get().putBoolean(Constant.isShowResultKey, false)
+        EventBus.getDefault().unregister(this)
+        countryBean = null
+    }
+
+    private fun loadNativeAd() {
+        val adBean = Constant.AdMap[Constant.adNative_h]
+        var time: Long = 0
+        if (adBean != null) {
+            time = System.currentTimeMillis() - adBean.saveTime
+        }
+
+        if (adBean?.ad == null || time > 50 * 60 * 1000) {
+            adManage.loadAd(Constant.adNative_h, this, object : AdManage.OnLoadAdCompleteListener {
+                override fun onLoadAdComplete(ad: AdBean?) {
+                    if (ad?.ad != null) {
+                        showNativeAd(ad)
+                    }
+                }
+
+                override fun isMax() {
+
+                }
+            })
+        } else {
+            showNativeAd(adBean)
+        }
+    }
+
+    fun showNativeAd(ad: AdBean) {
+        adManage.showAd(
+            this@MainActivity,
+            Constant.adNative_h,
+            ad,
+            binding.adFrameLayout,
+            object : AdManage.OnShowAdCompleteListener {
+                override fun onShowAdComplete() {
+                }
+
+                override fun isMax() {
+                }
+
+            })
+    }
+
+
 
     override fun onPause() {
         super.onPause()

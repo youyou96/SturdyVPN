@@ -63,7 +63,7 @@ class BaseApplication : MultiDexApplication(), Application.ActivityLifecycleCall
             Constant.AdMap[Constant.adNative_r]?.ad = null
             Constant.AdMap[Constant.adInterstitial_h]?.ad = null
             Constant.AdMap[Constant.adInterstitial_r]?.ad = null
-            loadingData()
+            setServerAndAdData()
             registerActivityLifecycleCallbacks(this)
 
             // Log the Mobile Ads SDK version.
@@ -71,7 +71,7 @@ class BaseApplication : MultiDexApplication(), Application.ActivityLifecycleCall
         }
     }
 
-    private fun loadingData() {
+    private fun setServerAndAdData() {
         //load ad
         val adBeanNativeH = Constant.AdMap[Constant.adNative_h]
         if (adBeanNativeH != null) {
@@ -137,7 +137,7 @@ class BaseApplication : MultiDexApplication(), Application.ActivityLifecycleCall
                         override fun onLoadAdComplete(ad: AdBean?) {
                             if (currActivity != null && currActivity is ResultActivity) {
                                 if (ad?.ad != null) {
-                                    (currActivity as ResultActivity).showNativeAd(ad)
+                                    (currActivity as ResultActivity).showAd(ad)
                                 }
                             }
                         }
@@ -152,7 +152,7 @@ class BaseApplication : MultiDexApplication(), Application.ActivityLifecycleCall
                     override fun onLoadAdComplete(ad: AdBean?) {
                         if (currActivity != null && currActivity is ResultActivity) {
                             if (ad?.ad != null) {
-                                (currActivity as ResultActivity).showNativeAd(ad)
+                                (currActivity as ResultActivity).showAd(ad)
                             }
                         }
                     }
@@ -232,7 +232,7 @@ class BaseApplication : MultiDexApplication(), Application.ActivityLifecycleCall
                     activity.finish()
                 }
                 SPUtils.get().putBoolean(Constant.isShowResultKey, false)
-                loadingData()
+                setServerAndAdData()
             }
         }
 

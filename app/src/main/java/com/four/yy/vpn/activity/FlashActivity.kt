@@ -17,22 +17,22 @@ private const val COUNTER_TIME = 10L
 
 class FlashActivity : BaseActivity<ActivityFlashBinding>() {
     private var isShowAd = false
-    private var timer: CountDownTimer? = null
+    private var countDownTimer: CountDownTimer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         countDownTimer()
         InterNetUtil().getIpByServer(this)
-        setData()
+        setAdData()
     }
 
     private fun countDownTimer() {
-        timer = object : CountDownTimer(COUNTER_TIME * 1000, 1000L) {
+        countDownTimer = object : CountDownTimer(COUNTER_TIME * 1000, 1000L) {
             override fun onTick(p0: Long) {
                 val process = 100 - (p0 * 100 / COUNTER_TIME / 1000)
                 binding.progressBar.setProgress(process.toInt())
                 if (process >= 20) {
                     if (!isShowAd) {
-                        showAd()
+                        showOpenAd()
                     }
                 }
             }
@@ -42,29 +42,29 @@ class FlashActivity : BaseActivity<ActivityFlashBinding>() {
             }
 
         }
-        (timer as CountDownTimer).start()
+        (countDownTimer as CountDownTimer).start()
     }
 
     override fun onStart() {
         super.onStart()
-        loadAd()
+        loadOpenAd()
     }
 
     override fun onRestart() {
         super.onRestart()
 
-        if (timer != null) {
-            timer?.cancel()
+        if (countDownTimer != null) {
+            countDownTimer?.cancel()
             countDownTimer()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        timer?.cancel()
+        countDownTimer?.cancel()
     }
 
-    private fun setData() {
+    private fun setAdData() {
         if (SPUtils.get().getString(Constant.smart, "")?.isEmpty() == true) {
             val smartJson = EntityUtils().obtainNativeJsonData(this, "city.json")
             SPUtils.get().putString(Constant.smart, smartJson.toString())
@@ -75,7 +75,7 @@ class FlashActivity : BaseActivity<ActivityFlashBinding>() {
         }
     }
 
-    private fun showAd() {
+    private fun showOpenAd() {
         val adBean = Constant.AdMap[Constant.adOpen]
         val adManage = AdManage()
         var time: Long = 0
@@ -83,7 +83,7 @@ class FlashActivity : BaseActivity<ActivityFlashBinding>() {
             time = System.currentTimeMillis() - adBean.saveTime
         }
         if (adBean?.ad != null && time < 50 * 60 * 1000) {
-            timer?.cancel()
+            countDownTimer?.cancel()
             isShowAd = true
             adManage.showAd(
                 this@FlashActivity,
@@ -113,7 +113,7 @@ class FlashActivity : BaseActivity<ActivityFlashBinding>() {
         }
     }
 
-    private fun loadAd() {
+    private fun loadOpenAd() {
         isShowAd = false
         var adBean = Constant.AdMap[Constant.adOpen]
         val adManage = AdManage()

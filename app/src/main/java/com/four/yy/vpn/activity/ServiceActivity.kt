@@ -44,9 +44,9 @@ class ServiceActivity : BaseActivity<ActivityServerBinding>() {
         binding.allServerRv.layoutManager = serverLayoutManager
         binding.allServerRv.adapter = serverAdapter
         binding.idBack.setOnClickListener {
-            showInterAd()
+            showAd()
         }
-        setList()
+        setServerList()
         smartAdapter?.setOnItemClickListener(object : ServerAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, country: Country) {
                 if (country.isChoose == true) {
@@ -95,11 +95,11 @@ class ServiceActivity : BaseActivity<ActivityServerBinding>() {
                 }
             }
         })
-        loadInterAd()
+        loadAd()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun setList() {
+    private fun setServerList() {
         val countryJson: String? = SPUtils.get().getString(Constant.service, "")
         val countrySmartList: MutableList<Country> = ArrayList()
         val countryServerList: MutableList<Country> = ArrayList()
@@ -201,11 +201,11 @@ class ServiceActivity : BaseActivity<ActivityServerBinding>() {
     }
 
     override fun onBackPressed() {
-        showInterAd()
+        showAd()
     }
 
     private var adManage = AdManage()
-    private fun loadInterAd() {
+    private fun loadAd() {
         val adBean = Constant.AdMap[Constant.adInterstitial_r]
         if (adBean?.ad == null) {
             adManage.loadAd(
@@ -215,7 +215,7 @@ class ServiceActivity : BaseActivity<ActivityServerBinding>() {
         }
     }
 
-    private fun showInterAd() {
+    private fun showAd() {
         val adBean = Constant.AdMap[Constant.adInterstitial_r]
         var time: Long = 0
         if (adBean != null) {
